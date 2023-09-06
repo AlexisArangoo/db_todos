@@ -1,6 +1,7 @@
 import express from 'express'
 import db_todos from './util/db_todos.js'
 import Todo from './models/todos.model.js'
+import cors from 'cors'
 
 Todo
 
@@ -17,6 +18,7 @@ db_todos.sync()
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
    res.send('OK')

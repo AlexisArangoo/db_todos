@@ -24,9 +24,8 @@ app.get('/', (req, res) => {
    res.send('OK')
 })
 
-
-//GET todos
-app.get('/todos', async (req, res) => {
+//GET todos where completed:false
+app.get('/todos/false', async (req, res) => {
     
     try {
         const todos = await Todo.findAll({
@@ -34,6 +33,32 @@ app.get('/todos', async (req, res) => {
                    completed: false 
                 }  
         })
+        res.json(todos)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+//GET todos where completed:true
+app.get('/todos/true', async (req, res) => {
+    
+    try {
+        const todos = await Todo.findAll({
+            where: {
+                   completed: true 
+                }  
+        })
+        res.json(todos)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+//GET todos
+app.get('/todos', async (req, res) => {
+    
+    try {
+        const todos = await Todo.findAll()
         res.json(todos)
     } catch (error) {
         res.status(400).json(error)

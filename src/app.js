@@ -27,8 +27,13 @@ app.get('/', (req, res) => {
 
 //GET todos
 app.get('/todos', async (req, res) => {
+    
     try {
-        const todos = await Todo.findAll()
+        const todos = await Todo.findAll({
+            where: {
+                   completed: false 
+                }  
+        })
         res.json(todos)
     } catch (error) {
         res.status(400).json(error)
